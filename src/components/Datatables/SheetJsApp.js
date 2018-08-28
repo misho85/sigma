@@ -31,7 +31,7 @@ const styles = theme => ({
 */
 class SheetJSApp extends Component {
   state = {
-    data: [] /* Array of Arrays e.g. [["a","b"],[1,2]] */,
+    // data: [] /* Array of Arrays e.g. [["a","b"],[1,2]] */,
     plate: []
   };
 
@@ -44,16 +44,16 @@ class SheetJSApp extends Component {
       const bstr = e.target.result;
       const wb = XLSX.read(bstr, { type: rABS ? 'binary' : 'array' });
       /* Get first worksheet */
-      const wsname = wb.SheetNames[0];
+      const wsname = wb.SheetNames[1]; // drugi worksheet
       const ws = wb.Sheets[wsname];
       /* Convert array of arrays */
       const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true });
       /* Update state */
-      this.setState({ data });
-
+      // this.setState({ data });
+      // console.log(data);
       /* Kalkulator plate */
       const filterData = i => {
-        if (!isNaN(i[1]) && i.length > 30) {
+        if (!isNaN(i[0]) && i.length > 30) {
           return true;
         }
       };
@@ -68,7 +68,7 @@ class SheetJSApp extends Component {
         '11-19': [8, 0],
         '12-19': [7, 0],
         '12-20': [8, 0],
-        '12-21*': [9, 0],
+        '12-21': [9, 0],
         '12-22*': [10, 0],
         '16-01': [6, 3],
         '19-7': [4, 0],
@@ -83,6 +83,7 @@ class SheetJSApp extends Component {
       const cenaPraznikSat = cenaDnevniSat + (110 / 100) * cenaDnevniSat;
 
       const plate = data.filter(filterData).map(r => {
+        // console.log(r);
         let brojDnevihSati = 0;
         let brojNocnihSati = 0;
         const brojPraznikSati = 0;
@@ -100,10 +101,10 @@ class SheetJSApp extends Component {
             brojPraznikSati * cenaPraznikSat
         );
         // return r.push(plata);
-        return [r[1], r[2], plata, brojDnevihSati, brojNocnihSati];
+        return [r[0], r[1], plata, brojDnevihSati, brojNocnihSati];
       });
       this.setState({ plate });
-      console.log(plate);
+      // console.log(plate);
     };
 
     if (rABS) reader.readAsBinaryString(file);
@@ -135,5 +136,5 @@ SheetJSApp.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SheetJSApp);
 // if (typeof module !== "undefined") module.exports = SheetJSApp;
+export default withStyles(styles)(SheetJSApp);
