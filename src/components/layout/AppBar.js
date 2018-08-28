@@ -37,7 +37,13 @@ const Appbar = props => {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Kalkulator
           </Typography>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            title="See the source on GitHub"
+            aria-label="GitHub"
+            href="https://github.com/misho85/kalkulator-plate"
+            target="_blank"
+          >
             <FontAwesomeIcon icon={['fab', 'github']} />
           </IconButton>
         </Toolbar>
