@@ -1,21 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Appbar from './components/layout/Appbar';
+import SheetJsApp from './components/Datatables/SheetJsApp';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faGithub, faPlaneDeparture);
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    type: 'dark'
   }
-}
+});
+
+const App = () => {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Appbar />
+      <SheetJsApp />
+    </MuiThemeProvider>
+  );
+};
 
 export default App;
