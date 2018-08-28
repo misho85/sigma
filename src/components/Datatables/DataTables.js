@@ -57,7 +57,7 @@ class DataTables extends Component {
 
     return (
       <MUIDataTable
-        title={'GEJTOVI'}
+        title={'Gate Operators'}
         data={data}
         columns={columns}
         options={options}
