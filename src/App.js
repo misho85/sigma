@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Appbar from './components/layout/AppBar';
 import SheetJsApp from './components/Datatables/SheetJsApp';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
@@ -12,21 +12,29 @@ import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faGithub, faPlaneDeparture);
 
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    type: 'dark'
-  }
-});
+class App extends Component {
+  state = {
+    type: true
+  };
 
-const App = () => {
-  return (
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <Appbar />
-      <SheetJsApp />
-    </MuiThemeProvider>
-  );
-};
+  changeTheme = () => this.setState({ type: !this.state.type });
+
+  render() {
+    const theme = createMuiTheme({
+      palette: {
+        primary: blue,
+        type: this.state.type ? 'dark' : 'light'
+      }
+    });
+
+    return (
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Appbar changeTheme={this.changeTheme} />
+        <SheetJsApp />
+      </MuiThemeProvider>
+    );
+  }
+}
 
 export default App;

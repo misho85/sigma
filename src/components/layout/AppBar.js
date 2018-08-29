@@ -22,12 +22,13 @@ const styles = {
 };
 
 const Appbar = props => {
-  const { classes } = props;
+  const { classes, changeTheme } = props;
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
+            onClick={changeTheme}
             className={classes.menuButton}
             color="inherit"
             aria-label="Menu"
