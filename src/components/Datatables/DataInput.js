@@ -71,7 +71,7 @@ class DataInput extends Component {
               className={classes.button}
               color="primary"
             >
-              Upload
+              Unesi Raspored
               <CloudUploadIcon className={classes.uploadIcon} />
             </Button>
           </label>

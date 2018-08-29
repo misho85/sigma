@@ -35,7 +35,7 @@ const Appbar = props => {
             <FontAwesomeIcon icon="plane-departure" />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Kalkulator
+            Kalkulator Plate
           </Typography>
           <IconButton
             color="inherit"
