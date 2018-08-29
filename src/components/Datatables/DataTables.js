@@ -24,8 +24,8 @@ class DataTables extends Component {
             const nf = new Intl.NumberFormat('sr-Latn-CS', {
               style: 'currency',
               currency: 'RSD',
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
             });
 
             return nf.format(value);
