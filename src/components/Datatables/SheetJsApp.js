@@ -78,7 +78,7 @@ class SheetJSApp extends Component {
       const smenaKeys = Object.keys(smena);
       const smenaValues = Object.values(smena);
 
-      const cenaDnevniSat = 284.09;
+      const cenaDnevniSat = 312.50;
       const cenaNocniSat = cenaDnevniSat + (26 / 100) * cenaDnevniSat;
       const cenaPraznikSat = cenaDnevniSat + (110 / 100) * cenaDnevniSat;
 
