@@ -44,6 +44,7 @@ const Appbar = props => {
             aria-label="GitHub"
             href="https://github.com/misho85/kalkulator-plate"
             target="_blank"
+            rel="noreferrer"
           >
             <FontAwesomeIcon icon={['fab', 'github']} />
           </IconButton>
