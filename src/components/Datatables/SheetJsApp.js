@@ -51,7 +51,14 @@ class SheetJSApp extends Component {
       /* Update state */
       // this.setState({ data });
       // console.log(data);
+
       /* Kalkulator plate */
+
+      // const tabPodaci = `${data[0][8]} ${data[0][11]}`;
+      let neradniDani = 0;
+      data[2].forEach(e => (e === 'Sat' || e === 'Sun' ? neradniDani++ : null));
+      const radniDani = data[2].length - 2 - neradniDani;
+
       const filterData = i => {
         if (!isNaN(i[0]) && i.length > 30) {
           return true;
@@ -78,15 +85,16 @@ class SheetJSApp extends Component {
       const smenaKeys = Object.keys(smena);
       const smenaValues = Object.values(smena);
 
-      const cenaDnevniSat = 312.50;
+      const cenaDnevniSat = 6250 / radniDani;
+      // console.log(cenaDnevniSat);
       const cenaNocniSat = cenaDnevniSat + (26 / 100) * cenaDnevniSat;
-      const cenaPraznikSat = cenaDnevniSat + (110 / 100) * cenaDnevniSat;
+      // const cenaPraznikSat = cenaDnevniSat + (110 / 100) * cenaDnevniSat;
 
       const plate = data.filter(filterData).map(r => {
         // console.log(r);
         let brojDnevihSati = 0;
         let brojNocnihSati = 0;
-        const brojPraznikSati = 0;
+        // const brojPraznikSati = 0;
         r.forEach(e => {
           for (let i = 0; i < smenaKeys.length; i++) {
             if (e === smenaKeys[i]) {
@@ -96,9 +104,8 @@ class SheetJSApp extends Component {
           }
         });
         const plata = Math.round(
-          brojDnevihSati * cenaDnevniSat +
-            brojNocnihSati * cenaNocniSat +
-            brojPraznikSati * cenaPraznikSat
+          brojDnevihSati * cenaDnevniSat + brojNocnihSati * cenaNocniSat
+          // + brojPraznikSati * cenaPraznikSat
         );
         // return r.push(plata);
         return [r[0], r[1], plata, brojDnevihSati, brojNocnihSati];
