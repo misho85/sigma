@@ -31,7 +31,8 @@ const Appbar = props => {
             onClick={changeTheme}
             className={classes.menuButton}
             color="inherit"
-            aria-label="Menu"
+            aria-label="Logo"
+            title="Change theme"
           >
             <FontAwesomeIcon icon="plane-departure" />
           </IconButton>
