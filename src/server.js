@@ -10,7 +10,7 @@ import {
   createGenerateClassName
 } from '@material-ui/core/styles';
 import { dom as fontawesomeDom } from '@fortawesome/fontawesome-svg-core';
-
+import path from 'path';
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
@@ -46,13 +46,16 @@ server
       res.redirect(context.url);
     } else {
       res.status(200).send(
-        `<!doctype html>
-    <html lang="">
+        `<!DOCTYPE html>
+    <html lang="en">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
+        <link rel='manifest' href='/manifest.json' />
+        <link rel='shortcut icon' href='/favicon.ico'>
         <title>Welcome to Razzle</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
         ${
           assets.client.css
             ? `<link rel="stylesheet" href="${assets.client.css}">`
@@ -64,14 +67,12 @@ server
             ? `<script src="${assets.client.js}" defer></script>`
             : `<script src="${assets.client.js}" defer crossorigin></script>`
         }
-        <style>
-        ${fontawesomeDom.css()}
-        </style>
+        <style>${fontawesomeDom.css()}</style>
     </head>
     <body>
         <div id="root">${markup}</div>
     </body>
-</html>`
+    </html>`
       );
     }
   });

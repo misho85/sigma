@@ -9,9 +9,6 @@ import {
   createGenerateClassName
 } from '@material-ui/core/styles';
 
-// This is needed in order to deduplicate the injection of CSS in the page.
-const sheetsManager = new WeakMap();
-
 class Main extends Component {
   // Remove the server-side injected CSS.
   componentDidMount() {
@@ -19,12 +16,26 @@ class Main extends Component {
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(registration => {
+          console.log('service worker registration successful');
+        })
+        .catch(err => {
+          console.warn('service worker registration failed', err.message);
+        });
+    }
   }
 
   render() {
     return <App />;
   }
 }
+
+// This is needed in order to deduplicate the injection of CSS in the page.
+const sheetsManager = new WeakMap();
 
 // Create a new class name generator.
 const generateClassName = createGenerateClassName();
