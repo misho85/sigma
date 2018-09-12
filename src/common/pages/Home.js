@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import Appbar from './components/layout/AppBar';
+import Appbar from '../components/layout/AppBar';
 import SheetJsApp from './components/Datatables/SheetJsApp';
 // import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 // import blue from '@material-ui/core/colors/blue';
-
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 class Home extends Component {
   state = {
@@ -23,7 +21,6 @@ class Home extends Component {
 
     return (
       <Fragment>
-        <CssBaseline />
         <Appbar changeTheme={this.changeTheme} />
         <SheetJsApp />
       </Fragment>
