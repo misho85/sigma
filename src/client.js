@@ -9,7 +9,12 @@ import {
   createGenerateClassName
 } from '@material-ui/core/styles';
 
-class Main extends Component {
+// This is needed in order to deduplicate the injection of CSS in the page.
+const sheetsManager = new WeakMap();
+// Create a new class name generator.
+const generateClassName = createGenerateClassName();
+
+class Client extends Component {
   // Remove the server-side injected CSS.
   componentDidMount() {
     const jssStyles = document.getElementById('jss-server-side');
@@ -30,28 +35,21 @@ class Main extends Component {
   }
 
   render() {
-    return <App />;
+    return (
+      <JssProvider generateClassName={generateClassName}>
+        <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
+          <HelmetProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </HelmetProvider>
+        </MuiThemeProvider>
+      </JssProvider>
+    );
   }
 }
 
-// This is needed in order to deduplicate the injection of CSS in the page.
-const sheetsManager = new WeakMap();
-
-// Create a new class name generator.
-const generateClassName = createGenerateClassName();
-
-hydrate(
-  <JssProvider generateClassName={generateClassName}>
-    <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Main />
-        </BrowserRouter>
-      </HelmetProvider>
-    </MuiThemeProvider>
-  </JssProvider>,
-  document.getElementById('root')
-);
+hydrate(<Client />, document.getElementById('root'));
 
 if (module.hot) {
   module.hot.accept();
