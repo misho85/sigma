@@ -8,19 +8,17 @@ const pwaConfig = {
 
 const manifestConfig = {
   filename: 'manifest.json',
-  name: 'Razzle App',
-  short_name: 'Razzle',
-  description: 'Another Razzle App',
-  orientation: 'portrait',
+  name: 'Sigma',
+  short_name: 'Sigma',
+  description: 'custom Excel doc web presentation',
   display: 'standalone',
   start_url: '.',
-  theme_color: '#ffffff',
-  background_color: '#ffffff',
+  theme_color: '#000000',
+  background_color: '#303030',
   icons: [
     {
-      src: require.resolve(path.join(__dirname, 'public', 'icon.png')),
-      sizes: '512x512',
-      type: 'image/png'
+      src: path.resolve('public/icon.png'),
+      sizes: [96, 128, 192, 256, 384, 512]
     }
   ]
 };

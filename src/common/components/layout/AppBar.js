@@ -37,7 +37,7 @@ const Appbar = props => {
             <FontAwesomeIcon icon="plane-departure" />
           </IconButton>
           <Typography variant="title" color="inherit" className={classes.flex}>
-            Sigma
+            SIGMA
           </Typography>
           <IconButton
             color="inherit"
