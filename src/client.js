@@ -8,7 +8,7 @@ import {
   MuiThemeProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
-import theme from './common/theme';
+import theme from './common/utils/theme';
 
 // This is needed in order to deduplicate the injection of CSS in the page.
 const sheetsManager = new WeakMap();

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet-async';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Home from './pages/Home';
 
-import './icons';
+import './utils/icons';
 
 const App = () => (
   <Fragment>

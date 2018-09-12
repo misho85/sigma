@@ -10,7 +10,7 @@ import {
   createGenerateClassName
 } from '@material-ui/core/styles';
 import { dom as fontawesomeDom } from '@fortawesome/fontawesome-svg-core';
-import theme from './common/theme';
+import theme from './common/utils/theme';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
