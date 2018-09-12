@@ -36,9 +36,11 @@ server
         generateClassName={generateClassName}
       >
         <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-          <StaticRouter context={context} location={req.url}>
-            <App />
-          </StaticRouter>
+          <HelmetProvider context={helmetContext}>
+            <StaticRouter context={context} location={req.url}>
+              <App />
+            </StaticRouter>
+          </HelmetProvider>
         </MuiThemeProvider>
       </JssProvider>
     );
