@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Appbar from '../components/layout/AppBar';
-import SheetJsApp from './components/datatables/SheetJsApp';
+import SheetJsApp from '../components/datatables/SheetJsApp';
 // import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 // import blue from '@material-ui/core/colors/blue';
 
