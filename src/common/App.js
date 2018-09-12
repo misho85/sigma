@@ -2,7 +2,9 @@ import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Helmet from 'react-helmet-async';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Layout from './components/layout/Layout';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 
 import './utils/icons';
 
@@ -24,9 +26,12 @@ const App = () => (
       />
     </Helmet>
     <CssBaseline />
-    <Switch>
-      <Route exact path="/" component={Home} />
-    </Switch>
+    <Layout>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route component={NotFound} />
+      </Switch>
+    </Layout>
   </Fragment>
 );
 
