@@ -2,18 +2,20 @@ import App from './common/App';
 import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 import express from 'express';
-import theme from './common/theme';
 import { renderToString } from 'react-dom/server';
+import { HelmetProvider } from 'react-helmet-async';
 import { JssProvider, SheetsRegistry } from 'react-jss';
 import {
   MuiThemeProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
 import { dom as fontawesomeDom } from '@fortawesome/fontawesome-svg-core';
-import path from 'path';
+import theme from './common/theme';
+
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
 const server = express();
+
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
@@ -25,7 +27,9 @@ server
     // Create a new class name generator.
     const generateClassName = createGenerateClassName();
 
+    const helmetContext = {};
     const context = {};
+    // Render the component to a string
     const markup = renderToString(
       <JssProvider
         registry={sheetsRegistry}
@@ -39,6 +43,8 @@ server
       </JssProvider>
     );
 
+    const { helmet } = helmetContext;
+
     // Grab the CSS from our sheetsRegistry.
     const css = sheetsRegistry.toString();
 
@@ -47,15 +53,11 @@ server
     } else {
       res.status(200).send(
         `<!DOCTYPE html>
-    <html lang="en">
+    <html ${helmet.htmlAttributes.toString()}>
     <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta charset="utf-8" />
-        <link rel='manifest' href='/manifest.json' />
-        <link rel='shortcut icon' href='/favicon.ico'>
-        <title>Welcome to Razzle</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
+        ${helmet.link.toString()}
         ${
           assets.client.css
             ? `<link rel="stylesheet" href="${assets.client.css}">`
@@ -69,7 +71,7 @@ server
         }
         <style>${fontawesomeDom.css()}</style>
     </head>
-    <body>
+    <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${markup}</div>
     </body>
     </html>`
