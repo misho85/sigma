@@ -43,9 +43,11 @@ const generateClassName = createGenerateClassName();
 hydrate(
   <JssProvider generateClassName={generateClassName}>
     <MuiThemeProvider sheetsManager={sheetsManager} theme={theme}>
-      <BrowserRouter>
-        <Main />
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>
+      </HelmetProvider>
     </MuiThemeProvider>
   </JssProvider>,
   document.getElementById('root')
