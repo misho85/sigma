@@ -2,12 +2,13 @@ import App from './common/App';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import React, { Component } from 'react';
 import { hydrate } from 'react-dom';
-import theme from './common/theme';
+import { HelmetProvider } from 'react-helmet-async';
 import JssProvider from 'react-jss/lib/JssProvider';
 import {
   MuiThemeProvider,
   createGenerateClassName
 } from '@material-ui/core/styles';
+import theme from './common/theme';
 
 // This is needed in order to deduplicate the injection of CSS in the page.
 const sheetsManager = new WeakMap();
